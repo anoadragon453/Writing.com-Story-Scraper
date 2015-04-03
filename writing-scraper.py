@@ -16,9 +16,7 @@ br = mechanize.Browser()
 current_working_directory = os.path.dirname(os.path.realpath(__file__))
 
 def formatText(string_to_format):
-    #string_to_format = string_to_format.replace('“','"').replace('„','"').replace("’","'").replace('”','"').decode('utf8', 'ignore')
     string_to_format = html2text.html2text(string_to_format.replace("<br />","\n").decode('utf8', 'ignore'))
-    #string_to_format = re.sub("[^A-Za-z0-9!?, ’'*().-/\"]+", '', string_to_format)
     return string_to_format
 
 def scrape(url,story_title):
@@ -37,7 +35,6 @@ def scrape(url,story_title):
     chapter_author_section = page_source.find('<a title="Username:',chapter_author_location)+19
     chapter_author_end = page_source.find('Member Since:', chapter_author_section)-1
     if chapter_author_section == 18:
-        #print "DEBUG: Uh oh"
         chapter_author_section = page_source.find('/user_id/',chapter_author_location)+9
         chapter_author_end = page_source.find('">',chapter_author_section)
     chapter_author = formatText(page_source[chapter_author_section:chapter_author_end])
@@ -61,10 +58,6 @@ def scrape(url,story_title):
             next_chapter_title+=" *"
         title_array.append(formatText(next_chapter_title))
         next_chapter_title_section = page_source.find('</a>',next_chapter_title_section) + 5
-    '''
-    for temp in title_array:
-        print "Title: " + temp + "\n"
-    '''
 
     # Generate HTML chapter file
     current_chapter = url[url.find('/map/')+5:]
@@ -122,12 +115,6 @@ def login():
     print "\nEnter password:"
     user_password = getpass()
 
-    '''
-    for form in br.forms():
-        print "Form name: ", form.name
-        print form
-    '''
-
     uname_control = br.form.find_control("login_username")
     uname_control.value = user_uname
 
@@ -164,13 +151,10 @@ def grabURL():
         return;
 
     if not "/map/" in url:
-        #print "no /map/ found\n"
         if not url.endswith('/'):
             url+='/'
-            #print "added /\n"
 
         url = url + "map/1"
-        #print "Opening ", url
 
     story_title = url[url.find("/item_id/")+9:url.find("/map/")]
 
