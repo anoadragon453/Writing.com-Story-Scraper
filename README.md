@@ -19,6 +19,7 @@ Then, install the following dependencies either through `pip` or manually:
 * `mechanize`
 * `html2text`
 * `yattag`
+* `requests`
 
 Once installed, `cd` into where you've downloaded the script and run `python writing-scraper.py`.
 
