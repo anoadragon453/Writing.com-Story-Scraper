@@ -1,6 +1,8 @@
 A Writing.com Story Scraper
 ==================
 
+[View a live version of this script here.](http://writingarchiver.no-ip.biz/)
+
 With the recent unexplained story take-downs on Writing.com, I wrote a little script to download/archive an entire interactive story and package it into a folder that you can browse with your browser.
 
 All it requires is a login and story URL.
